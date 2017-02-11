@@ -1,8 +1,10 @@
 'use strict';
 
 const onSuccess = function (data) {
-  if (data.book) {
-    console.log(data.book);
+  if (!data) {
+    console.warn('Either you deleted something or something went wrong.');
+  } else if (data.book) {
+    console.log(data.books);
   } else {
     console.table(data.books);
   }

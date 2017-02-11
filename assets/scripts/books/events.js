@@ -12,19 +12,30 @@ const ui = require('./ui.js');
 // button is clicked
 const onGetBooks = function (event) {
   event.preventDefault();
-  let book = getFormFields(event.target);
+  let form = getFormFields(event.target);
 
-  if (book.id.length === 0) {
+  if (form.book.id.length === 0) {
     api.index()
     .then(ui.onSuccess)
     .catch(ui.onError);
   } else {
-    api.show(book.id)
+    api.show(form.book.id)
     .then(ui.onSuccess)
     .catch(ui.onError);
   }
 };
 
+const onDeleteBook = function (event) {
+  event.preventDefault();
+  let form = getFormFields(event.target);
+
+  api.destroy(form.book.id)
+  .then(ui.onSuccess)
+  .catch(ui.onError)
+  ;
+};
+
 module.exports = {
   onGetBooks,
+  onDeleteBook,
 };
